@@ -12,6 +12,9 @@ Examples of unacceptable behavior by participants include the use of sexual lang
 imagery, derogatory comments or personal attacks, trolling, public or private harassment,
 insults, or other unprofessional conduct.
 
+One cannot commit to master directly. Any change of the master branch should be done by pull request and needs
+to be proved by other maintainers of the project. 
+
 Project maintainers have the right and responsibility to remove, edit, or reject comments,
 commits, code, wiki edits, issues, and other contributions that are not aligned to this
 Code of Conduct. Project maintainers who do not follow the Code of Conduct may be removed
