@@ -1,5 +1,5 @@
 # Contributing
-TidyPlusR is an open source project, and we welcome contributions of all kinds. By participating in this project, you agree to abide by our [code of conduct](CONDUCT.md), and agree to the potential redistribution of your code under our [license](LICENSE.md).
+TidyPlusPython is an open source project, and we welcome contributions of all kinds. By participating in this project, you agree to abide by our [code of conduct](CONDUCT.md), and agree to the potential redistribution of your code under our [license](LICENSE.md).
 
 ## How to contribute
 
