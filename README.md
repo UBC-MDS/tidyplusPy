@@ -40,13 +40,13 @@ Three main parts including different functions in `tidyplus`
   - `emphasizeon`
     * The function helps to emphasize some factors of interest by grouping other less important factors together. The input of the function will be a vector of n factors of interest and output will be a new column in original data frame that have n+1 factors, the n factors and one factor as "other".
 
-- `Missing Value Treatment` : Basic Imputation and EM Imputation - `impute`
-    * Basic Imputation: replace missing values in a column of a dataframe, or multiple columns of dataframe based on the `method` of imputation
+- `Missing Value Treatment` : Basic Imputation and EM Imputation -`em` and  `mmm`
+    * Basic Imputation: function used `mmm` replace missing values in a column of a dataframe, or multiple columns of dataframe based on the `method` of imputation
 
       - (Method = 'Mean') replace using mean
       - (Method = 'Median') replace using median
       - (Method = 'Mode') replace using mode
-    * EM Imputation: **Bonus** (method = "EM")
+    * EM Imputation: **Bonus** function used `em` (method = "EM")
       - Uses EM(Expectation- Maximization) algorithm to predict the closest value to the missing value
       - Can be used for both numeric and categorical predictions
 - `Markdown Table`:
