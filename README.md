@@ -32,13 +32,11 @@ The `tidyplus` package is an essential data cleaning package with features like 
 
 ## Functions included:
 Three main parts including different functions in `tidyplus`
-- `Data Manipulation` : Datatype conversions and string processing
+- `Data Manipulation` : Datatype cleansing
   - `typemix`
-    * The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be the name of the columns that have mixed types of data, all data types in the columns and the number of observations for each data type.
+    * The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.
   - `cleanmix`
-    * The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. Here, the input will be the name of the column (a vector of the name of columns) that they want to clean, and the type of data they want to keep. The observations in other types in the columns will be Na.
-  - `emphasizeon`
-    * The function helps to emphasize some factors of interest by grouping other less important factors together. The input of the function will be a vector of n factors of interest and output will be a new column in original data frame that have n+1 factors, the n factors and one factor as "other".
+    * The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. Here, the input will be the output by `typemix` function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original one but with specified data type in certain columns deleted.
 
 - `Missing Value Treatment` : Basic Imputation and EM Imputation - `impute`
     * Basic Imputation: replace missing values in a column of a dataframe, or multiple columns of dataframe based on the `method` of imputation
