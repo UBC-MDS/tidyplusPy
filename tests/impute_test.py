@@ -13,16 +13,16 @@ def test_input():
     """
 
     with pytest.raises(TypeError):
-        impute( data = 'some string' )
+        em( data = 'some string' )
 
     with pytest.raises(TypeError):
-        impute( data = False )
+        em( data = False )
 
     with pytest.raises(TypeError):
-        impute( data = 2 )
+        em( data = 2 )
 
     with pytest.raises(TypeError):
-        impute( data = np.array([0, np.nan, 2]) )
+        em( data = np.array([0, np.nan, 2]) )
 
 
 def missings():
@@ -34,7 +34,7 @@ def missings():
     empty_array = np.array([])
 
     with pytest.raises(ValueError):
-        impute( data = empty_array )
+        em( data = empty_array )
         
     
     assert isinstance(data, pd.DataFrame)
