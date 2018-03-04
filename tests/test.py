@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 import pandas as pd
-#from tidyplus import em
+#from tidypluspy import em
 import em
 
 
@@ -9,7 +9,7 @@ import em
 
     def test_input_as_dataframe(self):
         with pytest.raises(TypeError('`data` must be a dataframe.')):
-            summary_cv(data = pd.DataFrame(data={'a' :[1,2,3],'b' :['a','b','']}))
+            em(data = pd.DataFrame(data={'a' :[1,2,3],'b' :['a','b','']}))
 
 
     # Output Errors
