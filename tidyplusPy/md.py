@@ -14,12 +14,12 @@ def md_new(ncol = 2, nrow = 2, align = NULL, header = NA):
 	'''
 
 
-def md_data(row.index = NA, col.index = NA, row.names = NA, header = NA, align = NULL)
+def md_data(data, row.index = NA, col.index = NA, row.names = NA, header = NA, align = NULL)
 	'''	
 	Converts a pandas.DataFrame or matrix into a markdown table format.
 	
 	Parameters:
-		x: a pandas dataframe
+		data: a pandas dataframe
 		row.index,col.index: A numeric vector correspond to the index position of the rows/columns to be included. By default, all columns and rows are included.
 		header: A string of length = ncol to be used for the header of the table. If provided, the original header will be replaced.
 		align : column alignment: a string consisting of 'l' (left), 'c' (center) and/or 'r' (right). By default or if align = NULL, numeric columns are right-aligned, and other columns are left-aligned. If align = 'l', all columns are left aligned. e.t.c.
