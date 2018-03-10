@@ -1,0 +1,5 @@
+1,2,3,4,5
+number,character,number,,
+number,character,logical,,
+number,logical,logical,,
+character,number,logical,,
