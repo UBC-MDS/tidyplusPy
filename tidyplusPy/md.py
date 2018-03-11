@@ -1,41 +1,81 @@
-""" tidyplusPy.md"""
+def md_new(nrow = 2, ncol = 2, align = None, header = None):
+    '''
+    Creates a bare bone for generating a markdown table. Alignments and size of the table can be input by users.
 
-def md_new(ncol = 2, nrow = 2, align = NULL, header = NA):
-	'''
-	Creates a bare bone for generating a markdown table. Alignments and size of the table can be input by users.
-	
-	Parameters:
-		ncol, nrow : the number of columns and row for the markdown table
-		align	   : Column alignment: a character vector consisting of 'l' (left), 'c' (center) and/or 'r' (right). If align = 'l', all columns are left aligned. e.t.c.
-		header	   : A character vector of length = ncol to be used for the header of the table. Default NA.
-	Return: 
-		a string of the markdown source code
-	
-	'''
+    Parameters:
+        ncol, nrow : positive integer number of columns and row for the markdown table
+        align   : Column alignment: a string of 'l' (left), 'c' (center) or 'r' (right). If align = 'l', all columns are left aligned. e.t.c.
+        header   : A string list of len(header) = ncol to be used for the header of the table. Default None.
+    Return:
+        A string of the markdown source code
+
+    '''
+
+    class InputError(Exception):
+        """
+        Raised when there is any error from inputs that no base Python exceptions cover.
+        """
+        pass
+
+    ## check type of ncol and nrow
+    if not isinstance(ncol, int) or not isinstance(nrow, int) :
+        raise TypeError("'ncol' and 'nrow' expect positive integer number")
+
+    if ncol <=0 or nrow <=0:
+        raise InputError("'ncol' and 'nrow' expect positive integer number")
+
+    ## check type of align:
+    if not align == None:
+        if not isinstance(align, str):
+            raise TypeError("Expect a string of 'l', 'c', or 'r'")
+        if not len(align) ==1 :
+            raise InputError("'align' should be length 1")
+        if not align in ["l", "c", "r"]:
+            raise InputError("'align' should be either 'l', 'c', or 'r'")
+
+    ## check type of header:
+    if not header == None:
+        if not all(isinstance(n, str) for n in header) or not isinstance(header,list):
+            raise TypeError("Expect a list of strings")
+        if len(header) != ncol:
+            raise InputError("Expect 'len(header) = ncol'")
 
 
-def md_data(data, row.index = NA, col.index = NA, row.names = NA, header = NA, align = NULL)
-	'''	
-	Converts a pandas.DataFrame or matrix into a markdown table format.
-	
-	Parameters:
-		data: a pandas dataframe
-		row.index,col.index: A numeric vector correspond to the index position of the rows/columns to be included. By default, all columns and rows are included.
-		header: A string of length = ncol to be used for the header of the table. If provided, the original header will be replaced.
-		align : column alignment: a string consisting of 'l' (left), 'c' (center) and/or 'r' (right). By default or if align = NULL, numeric columns are right-aligned, and other columns are left-aligned. If align = 'l', all columns are left aligned. e.t.c.
-	Return: 
-		a string of the markdown source code
-	'''
+    column = ["|    "]
+    cols= column * ncol
+    cols.append("|")
 
-def md_reg(x, type = "weight")
-	'''
-	Converts a regression model result into a nice-formatted markdown table.
-	
-	Parameters:
-		x: a regression model class from sklearn
-		type: the type of output 
-			- weight: the parameters/weights of the model
-			- fit : the score of the model
-	Return: 
-		a string of the markdown source code
-	'''
+    # create row format
+    row = "".join(cols)
+    rows = "\n".join([row]*nrow)
+
+    # create alignment
+    l = ["|:---"]
+    c = ["|:--:"]
+    r = ["|---:"]
+    if align == None:
+        al = l * ncol
+        al.append("|")
+        al = "".join(al)
+    elif align in ["c","l","r"]:
+        al = eval(align) * ncol
+        al.append("|")
+        al = "".join(al)
+    else:
+        raise InputError("Expect a string of 'l', 'c', or 'r'")
+
+    # header
+    if header == None:
+        top = row
+    else:
+        h =[]
+        for name in header:
+            head = ["| ", name]
+            h.extend(head)
+        h.append("|")
+        top = "".join(h)
+
+    tbl = [top, al, rows]
+    tbl = "\n".join(tbl)
+    print(tbl)
+    return tbl

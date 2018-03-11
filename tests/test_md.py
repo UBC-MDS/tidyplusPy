@@ -1,76 +1,96 @@
 import pytest
-import tidyplusPy.md
+from tidyplusPy import md
 import numpy as np
-import pandas as pd
-import sklearn.datasets.iris_load
-from sklearn.linear_model import LinearRegression
 
+class Test_md:
 
-# Input errors
-def test_input():
-	"""
- 	Tests incorrect/unacceptable input data.
-    	These should raise a type error.
-    	check data type
-    	"""
-	# md_data
-	with pytest.raises(TypeError):
-        md.md_data( data = 'some string' )
+	def test_input1():
+		"""
+		Raise TypeError if ncol and nrow are not integer
+	    """
+		with pytest.raises(TypeError):
+			md_new( ncol = 'some string', nrow = 3 )
+		with pytest.raises(TypeError):
+			md_new( ncol = 3, nrow = 'some string' )
+		with pytest.raises(TypeError):
+			md_new( ncol = False, nrow = True )
 
-   	 with pytest.raises(TypeError):
-        md.md_data( data = False )
+	def test_input2():
+		"""
+		Raise InputError if ncol and nrow are not positive
+	    """
+		with pytest.raises(Exception):
+			md_new(-1,-1)
 
-    	with pytest.raises(TypeError):
-        md.md_data( data = 2 )
+	def test_input3():
+		"""
+		Raise TypeError if align is not a string
+		"""
+		with pytest.raises(TypeError):
+			md_new(align = False)
+		with pytest.raises(TypeError):
+			md_new(align = 2)
+		with pytest.raises(TypeError):
+			md_new(align = ["d","r"])
 
-    	with pytest.raises(TypeError):
-        md.md_data( data = np.array([0, np.nan, 2]) )
-	
-	# md_new
-	with pytest.raises(TypeError):
-        md.md_new( ncol = 'some string', nrow = 'some string' )
+	def test_input4():
+		"""
+		Raise InputError if 'align' is none of 'l', 'c', or 'r'
+		"""
+		with pytest.raises(Exception):
+			md_new(align = "q")
 
-   	with pytest.raises(TypeError):
-        md.md_new( ncol = False, nrow = True )
+	def test_input5():
+		"""
+		Raise InputError if len(align) !=1
+		"""
+		with pytest.raises(Exception):
+			md_new(align = "rrr")
 
-    	with pytest.raises(TypeError):
-        md.md_new( ncol = np.array([0, np.nan, 2]), nrow = np.array([3,2,1]) )
-	
-	# md_reg
-	with pytest.raises(TypeError):
-        md.md_reg( x = 'some string' )
+	def test_input6():
+		"""
+		Raise TypeError if header is not a list
+		"""
+		with pytest.raises(TypeError):
+			md_new(header = "df")
+		with pytest.raises(TypeError):
+			md_new(header = (1,2,3))
 
-    	with pytest.raises(TypeError):
-        md.md_reg( x = False )
+	def test_input7():
+		"""
+		Raise TypeError if the element of header is not a strings
+		"""
+		with pytest.raises(TypeError):
+			md_new(header = ["df",123,True])
 
-    	with pytest.raises(TypeError):
-        md.md_reg( x = 2 )
+	def test_input8():
+		"""
+		Raise InputError if 'len(header) != ncol'
+		"""
+		with pytest.raises(Exception):
+			md_new(ncol = 5, header = ['foo','boo','laa'])
 
-    	with pytest.raises(TypeError):
-        md.md_reg( x = np.array([0, np.nan, 2]) )
+	# Output errors
+	def test_output1(self):
+		"""
+		Test if md_new() give  correct result
+		"""
+		assert md_new() == '|    |    |\n|:---|:---|\n|    |    |\n|    |    |' # a printed markdown source code will also be printed out
 
+	def test_output2(self):
+		"""
+		Test if md_new() give  correct result
+		"""
+		assert md_new(3,3) == '|    |    |    |\n|:---|:---|:---|\n|    |    |    |\n|    |    |    |\n|    |    |    |'
 
-# Output errors
-def test_output()
-	df = load_iris()
-	lr = LinearRegression()
-	lr.fit(df['Sepal.Width'], df['Sepal.Length'])
-	assert (md.md_new(ncol = 2, nrow = 2) == "|   |   |
-                             			  |:--|:--|
-                               			  |   |   |
-                             			  |   |   |") 
-	assert (md.md_data(data = head(iris) == 
-"| Sepal.Length| Sepal.Width| Petal.Length| Petal.Width|Species |
-|------------:|-----------:|------------:|-----------:|:-------|
-|          5.1|         3.5|          1.4|         0.2|setosa  |
-|          4.9|         3.0|          1.4|         0.2|setosa  |
-|          4.7|         3.2|          1.3|         0.2|setosa  |
-|          4.6|         3.1|          1.5|         0.2|setosa  |
-|          5.0|         3.6|          1.4|         0.2|setosa  |
-|          5.4|         3.9|          1.7|         0.4|setosa  |")
+	def test_output3(self):
+		"""
+		Test if md_new() give  correct result
+		"""
+		assert md_new(3,3, align= "c") == '|    |    |    |\n|:--:|:--:|:--:|\n|    |    |    |\n|    |    |    |\n|    |    |    |'
 
-	assert (md.md_reg(lr ,type = "weight") == "
-	            |term        |   estimate| 
-                    |-----------:|:----------|
-                    |w0          |  6.5262226|
-                    |w1          | -0.2233611|")
+	def test_output4(self):
+		"""
+		Test if md_new() give  correct result
+		"""
+		assert md_new(align ="c", header = ["foo","boo"]) == '| foo| boo|\n|:--:|:--:|\n|    |    |\n|    |    |'
