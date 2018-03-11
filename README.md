@@ -89,7 +89,7 @@ mmm(df,method = "mode") ### method can be changed to mean and median as well
 
 * Works on ONLY on nd-array for now
 ```
-from tidyplusPy import em
+from tidyplusPy import EM
 
 matrix= np.random.rand(5,4)
 matrix[1,0] = np.nan
