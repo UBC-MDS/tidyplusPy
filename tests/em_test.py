@@ -2,9 +2,13 @@ import numpy as np
 import pytest
 import pandas as pd
 
+from tidyplusPy import em
+from tidyplusPy import mmm
+
 d = {'v_num': [4.1,np.nan,12.2,11,3.4,1.6,3.3,5.5], 'v_char': ['one','two','','two','two','one','two','two']}
 data = pd.DataFrame(data=d)
 col = list(data["v_num"])
+dat = [1,2,3,np.nan]
 def test_input():
     """
     Tests incorrect/unacceptable input data.
@@ -45,6 +49,21 @@ def missings():
     
    # df.columns[df.isnull().any()]
     
+    
+#### New tests
+
+
+### Check for inputes for both EM 
+
+def em_array_match():
+    with pytest.raises(TypeError("Input for EM can only be nd array")):
+        em(data,loops = 50)
+def em_run_array_match():
+    with pytest.raises(TypeError("Input for EM can only be nd array")):
+        em_run(data,loops = 50)
+ 
+
+
     
 
 
