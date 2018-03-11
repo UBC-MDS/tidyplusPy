@@ -42,8 +42,19 @@ def missings():
     assert isinstance(data.v_char[1],str)
     assert sum(data.v_num.isnull()) > 0
     assert sum(data.v_char=='') > 0
+
+#### New tests
+
+
+### Check for inputes for both MMM
     
-   # df.columns[df.isnull().any()]
+def mmm_df_match():
+    with pytest.raises(TypeError("Input for MMM can only be dataframe")):
+        mmm(dat, method= "mean")
+        
+def check_method():
+    with pytest.raises(TypeError("Method can only be mean, median or mode")):
+        mmm(data, method= "max")
     
     
 
