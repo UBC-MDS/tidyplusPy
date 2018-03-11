@@ -22,11 +22,21 @@
 ## Latest
 
 * Date : Feb 11, 2018
-* Release : v1.0
+* Release : v3.0
 
 ## About
 
 The `tidyplus` package is an essential data cleaning package with features like `missing value treatment`, `data manipulation` and displaying data as `markdown table` for documents. The package adds a few additional functionalities on the existing data wrangling packages (i.e. Pandas). The objective of this package is to provide a few specific functions to solve some of the pressing issues in data cleaning.
+
+
+## Install and import
+
+
+```
+pip install tidyplusPy
+
+import tidyplusPy
+```
 
 
 
@@ -52,6 +62,43 @@ Three main parts including different functions in `tidyplus`
   - `md_data()`: This function converts a dataframe or matrix into a markdown table format.
   - `md_reg()`: This function converts a regression model object into a nice-formatted markdown table.
 
+## Example
+
+
+#### Imputation with mean/ median / mode
+
+* Works on pandas dataframe
+```
+from tidyplusPy import mmm
+
+NaN = float('nan')
+ID = [1, 2, 3, 4, 5, 6, 7]
+A = [NaN, NaN, NaN, 0.1, 0.3, 0.3, 0.4]
+B = [0.2, NaN, 0.2, 0.7, 0.9, NaN, NaN]
+C = [NaN, 'A', 'B', NaN, 'C', 'D', 'D']
+D = [NaN, 'C', 'E', NaN, 'C', 'H', 'D']
+columns = {'A':A, 'B':B, 'C':C, 'D':D}
+df = pd.DataFrame(columns, index=ID)
+df.index.name = 'ID'
+
+
+mmm(df,method = "mode") ### method can be changed to mean and median as well
+```
+
+#### Imputation with EM
+
+* Works on ONLY on nd-array for now
+```
+from tidyplusPy import em
+
+matrix= np.random.rand(5,4)
+matrix[1,0] = np.nan
+matrix[2,1] = np.nan
+matrix[4,2] = np.nan
+matrix[3,3] = np.nan
+
+em(matrix)
+```
 
 ## Used Scenario
 
