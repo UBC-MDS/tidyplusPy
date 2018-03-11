@@ -1,4 +1,4 @@
-def cleanmix(typemix_result,column,type=majority,keep=TRUE):
+def cleanmix(typemix_result,column,type,keep=TRUE):
     '''
     The function helps to delete the observations with unwanted data types in indicated columns in a data frame.
     
