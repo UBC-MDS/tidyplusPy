@@ -33,7 +33,7 @@ The `tidyplus` package is an essential data cleaning package with features like 
 
 
 ```
-pip install tidyplusPy
+pip install git+https://github.com/UBC-MDS/tidyplusPy.git
 
 import tidyplusPy
 ```
