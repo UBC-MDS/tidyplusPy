@@ -16,7 +16,7 @@ def mmm(data, method= "mean/median/mode"):
     -------
         Imputed data: Pandas dataframe
     """
-    df = dataframe
+    df = data
     df_num = df._get_numeric_data() ### Get only numeric columns from dataframe
     if method == "mean" :
         out = df_num.apply(lambda x: x.fillna(x.mean()),axis=0)
