@@ -23,7 +23,7 @@ def cleanmix(typemix_result,column,type,keep=True):
     
     '''
     import pandas as pd
-    import numpy as py
+    import numpy as np
     
     if not isinstance(typemix_result,list):
         raise TypeError("The input should be a list of data frames") 

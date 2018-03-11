@@ -18,7 +18,7 @@ def typemix(df):
     
     '''
     import pandas as pd
-    import numpy as py
+    import numpy as np
     
     if not isinstance(df,pd.DataFrame):
         raise TypeError("Input must be a data frame") 
