@@ -101,7 +101,7 @@ df = pd.DataFrame(columns, index=ID)
 df.index.name = 'ID'
 
 
-mmm(df,method = "mode") ### method can be changed to mean and median as well
+mmm.mmm(df,method = "mode") ### method can be changed to mean and median as well
 ```
 
 #### Imputation with EM
@@ -116,7 +116,7 @@ matrix[2,1] = np.nan
 matrix[4,2] = np.nan
 matrix[3,3] = np.nan
 
-em(matrix)
+EM.em(matrix)
 ```
 
 ## Used Scenario
