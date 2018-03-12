@@ -21,7 +21,7 @@ def md_new(nrow = 2, ncol = 2, align = None, header = None):
     if not isinstance(ncol, int) or not isinstance(nrow, int) :
         raise TypeError("'ncol' and 'nrow' expect positive integer number")
 
-    if ncol <=0 or nrow <=0:
+    if (ncol <=0 or nrow <=0) and (isinstance(ncol,int) or isinstance(ncol,int)):
         raise InputError("'ncol' and 'nrow' expect positive integer number")
 
     ## check type of align:
