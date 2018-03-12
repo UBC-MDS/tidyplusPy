@@ -10,18 +10,8 @@ class Test_md:
 	    """
 		with pytest.raises(TypeError):
 			md.md_new( ncol = 'some string', nrow = 3 )
-	def test_input1_2(self):
-		"""
-		Raise TypeError if ncol and nrow are not integer
-	    """
 		with pytest.raises(TypeError):
 			md.md_new( ncol = 3, nrow = 'some string' )
-	def test_input1_3(self):
-		"""
-		Raise TypeError if ncol and nrow are not integer
-	    """
-		with pytest.raises(TypeError):
-			md.md_new( ncol = False, nrow = True )
 
 	def test_input2(self):
 		"""
