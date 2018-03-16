@@ -12,7 +12,7 @@
 
 [![issues](https://img.shields.io/github/issues/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/issues)
 
-[![Build Status](https://travis-ci.org/UBC-MDS/BlackBox_Python.svg?branch=master)](https://travis-ci.org/UBC-MDS/BlackBox_Python)
+[![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
 
 ## Contributors:
 
