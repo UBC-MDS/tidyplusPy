@@ -1,13 +1,19 @@
 import pytest
 import pandas as pd
 import numpy as np
-from tidyplusPy import typemix, cleanmix
+import os
+from tidyplusPy.typemix import typemix
+from tidyplusPy.cleanmix import cleanmix
 
 # prepare samples
-sample=pd.read_csv("data/test_sample.csv")
-cleanmix_e1=pd.read_csv("data/cleanmix_e1.csv")
+fname = os.path.join(os.path.dirname(__file__), 'data/test_sample.csv')
+sample=pd.read_csv(fname)
+fname = os.path.join(os.path.dirname(__file__), 'data/cleanmix_e1.csv')
+cleanmix_e1=pd.read_csv(fname)
+cleanmix_e1.iloc[3,0]=float('nan')
 cleanmix_e2=sample.copy()
 cleanmix_e2.iloc[3,0]=float('nan')
+result=typemix(sample)
 
 # check inputs
 def test_input():
@@ -17,28 +23,22 @@ def test_input():
     check input data type and value
     """
 
-    with pytest.raises(TypeError) as e_info:
+    with pytest.raises(TypeError):
         cleanmix(sample,column=[1,2],type="logical")
-        raise TypeError('The input should be a list of data frames')   
-    assert e_info.value.message == 'The input should be a list of data frames' 
     
-    with pytest.warns(UserWarning) as record:
-        cleanmix(typemix(sample),column=4,type="logical")
-        warnings.warn("A column deos not have type mixture", UserWarning)
-    assert record[0].message.args[0] == "A column deos not have type mixture"
+    with pytest.warns(UserWarning):
+        cleanmix(result,column=4,type="logical")
 
-    with pytest.warns(UserWarning) as record:
-        cleanmix(typemix(sample),column=1,type="logical")
-        warnings.warn("The column deos not have the data type", UserWarning)
-    assert record[0].message.args[0] == "The column deos not have the data type"
-    
+    with pytest.warns(UserWarning):
+        cleanmix(result,column=0,type="logical")
     
 # check the code accuracy
 def test_output():
     '''
     Check if the function gives us expected results.
     '''
-    assert cleanmix(typemix(sample),column=[1,2],type=['number','characyer']) is cleanmix_e1
-    assert cleanmix(typemix(sample),column=1,type="number") is cleanmix_e2
-    assert cleanmix(typemix(sample),column=1,type="character",keep=FALSE) is cleanmix_e2
+    assert pd.DataFrame.equals(cleanmix(result,column=[0,1],type=['number','character']), cleanmix_e1)
+    assert pd.DataFrame.equals(cleanmix(result,column=0,type="number"), cleanmix_e2)
+    assert pd.DataFrame.equals(cleanmix(result,column=0,type="character",keep=False), cleanmix_e2)
+
     
