@@ -24,6 +24,7 @@ def cleanmix(typemix_result,column,type,keep=True):
     '''
     import pandas as pd
     import numpy as np
+    import warnings
 
     if not isinstance(typemix_result,list):
         raise TypeError("The input should be a list of data frames")

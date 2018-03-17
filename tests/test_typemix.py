@@ -1,13 +1,17 @@
 import pytest
 import pandas as pd
 import numpy as np
-from tidyplusPy import typemix
+import os
+from tidyplusPy.typemix import typemix
 
 # prepare samples
 # for typemix function
-sample=pd.read_csv("data/test_sample.csv")
-typemix_output2=pd.read_csv("data/typemix_output2.csv")
-typemix_output3=pd.read_csv("data/typemix_output3.csv")
+fname = os.path.join(os.path.dirname(__file__), 'data/test_sample.csv')
+sample=pd.read_csv(fname)
+fname = os.path.join(os.path.dirname(__file__), "data/typemix_output2.csv")
+typemix_output2=pd.read_csv(fname)
+fname = os.path.join(os.path.dirname(__file__), "data/typemix_output3.csv")
+typemix_output3=pd.read_csv(fname)
 
 # check typemix:
 # check inputs
@@ -17,28 +21,20 @@ def test_input():
     These should raise a type error.
     check input data type
     """
-
-    with pytest.raises(TypeError) as e_info:
+    with pytest.raises(TypeError):
         typemix(df = [1,2,3,"do"])
-        raise TypeError('The input should be a data frame')   
-    assert e_info.value.message == 'The input should be a data frame' 
-
-    with pytest.raises(TypeError) as e_info:
-        typemix(df = np.array([1,2,3,"do"]))
-        raise TypeError('The input should be a data frame')   
-    assert e_info.value.message == 'The input should be a data frame' 
         
-    with pytest.raises(TypeError) as e_info:
+    with pytest.raises(TypeError):
+        typemix(df = np.array([1,2,3,"do"]))
+        
+    with pytest.raises(TypeError):
         typemix(df = np.matrix([1,2,3,"do"]))
-        raise TypeError('The input should be a data frame')   
-    assert e_info.value.message == 'The input should be a data frame' 
 
 # check the code accuracy
 def test_output():
     '''
     Check if the function gives us expected results.
     '''
-    assert typemix(sample)[1] is sample
-    assert typemix(sample)[2] is typemix_output2
-    assert typemix(sample)[3] is typemix_output3
- 
+    assert typemix(sample)[0] is sample
+    assert pd.DataFrame.equals(typemix_output2, typemix(sample)[1])
+    assert pd.DataFrame.equals(typemix(sample)[2], typemix_output3)
