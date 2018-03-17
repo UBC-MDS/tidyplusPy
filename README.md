@@ -12,6 +12,7 @@
 
 [![issues](https://img.shields.io/github/issues/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/issues)
 
+[![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
 
 ## Contributors:
 
@@ -33,7 +34,7 @@ The `tidyplus` package is an essential data cleaning package with features like 
 
 
 ```
-pip install tidyplusPy
+pip install git+https://github.com/UBC-MDS/tidyplusPy.git
 
 import tidyplusPy
 ```
@@ -64,6 +65,25 @@ Three main parts including different functions in `tidyplus`
 
 ## Example
 
+This is a basic example which shows you how to solve a common problem:
+
+#### Datatype cleansing
+
+The section has two functions, typemix and cleanmix.
+
+- The input for typemix function is a `data frame`, and the output is a list of 3 data frames. The first one is the same as the input data frame, the second one tells you the location and types of data in the columns where there is type mixture. The third data frame is a summary of the second data frame.
+
+- The input for cleanmix function is the result from typemix function, the column(s) you want to work on, the type(s) of data you want to keep/delete, and if you want to keep/delete the instances specified.
+
+```r
+dat<-data.frame(x1=c(1,2,3,"1.2.3"),
+                x2=c("test","test",1,TRUE),
+                x3=c(TRUE,TRUE,FALSE,FALSE))
+
+typemix(dat) #
+
+cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
+```
 
 #### Imputation with mean/ median / mode
 
@@ -82,7 +102,7 @@ df = pd.DataFrame(columns, index=ID)
 df.index.name = 'ID'
 
 
-mmm(df,method = "mode") ### method can be changed to mean and median as well
+mmm.mmm(df,method = "mode") ### method can be changed to mean and median as well
 ```
 
 #### Imputation with EM
@@ -97,7 +117,7 @@ matrix[2,1] = np.nan
 matrix[4,2] = np.nan
 matrix[3,3] = np.nan
 
-em(matrix)
+EM.em(matrix)
 ```
 
 ## Used Scenario

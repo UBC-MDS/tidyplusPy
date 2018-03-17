@@ -1,6 +1,7 @@
 import numpy as np
 import pytest
 import pandas as pd
+import random
 
 def em_run(data, loops=50):
     """ Imputes data using expectation maximization.
