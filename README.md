@@ -12,7 +12,6 @@
 
 [![issues](https://img.shields.io/github/issues/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/issues)
 
-[![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
 
 ## Contributors:
 
@@ -22,32 +21,42 @@
 
 ## Latest
 
-* Date : Feb 11, 2018
-* Release : v3.0
+* Date : March 17, 2018
+* Release : v4.0
 
 ## About
 
-The `tidyplus` package is an essential data cleaning package with features like `missing value treatment`, `data manipulation` and displaying data as `markdown table` for documents. The package adds a few additional functionalities on the existing data wrangling packages (i.e. Pandas). The objective of this package is to provide a few specific functions to solve some of the pressing issues in data cleaning.
+The `tidyplusPy` package is an essential data cleaning package with features like **missing value treatment**, **data type cleansing** and displaying data as **markdown table** for documents. The package adds a few additional functionalities on the existing data wrangling packages (i.e. Pandas). The objective of this package is to provide a few specific functions to solve some of the pressing issues in data cleaning.
 
 
 ## Install and import
 
+The package needs to be installed from GitHub. Open your Anaconda or Terminal, and type in:
 
 ```
+# if you have git installed in your computer already, try:
 pip install git+https://github.com/UBC-MDS/tidyplusPy.git
 
-import tidyplusPy
+# if you do not have git installed, try:
+pip install https://github.com/UBC-MDS/tidyplusPy/zipball/master
 ```
 
+There are 5 functions, typemix, cleanmix, EM, md and mmm, in the package "tidyplusPy". To import the package and call functions in the package, do:
+```
+import tidyplusPy
 
+# To use a function, you need call it twice, like:
+typemix.typemix()
+```
 
 ## Functions included:
-Three main parts including different functions in `tidyplus`
-- `Data Manipulation` : Datatype cleansing
+Three main parts including different functions in `tidyplusPy`
+- `Data Type Cleansing` :
   - `typemix`
-    * The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames.
+    * The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames reporting details about the mixture of data types. The first data frame in the list is the same as the input data frame, the second one tells you the location and types of data in the columns where there is type mixture. The third data frame is a summary of the second data frame.
+
   - `cleanmix`
-    * The function helps to clean our data frame. After knowing the location of discrepancy of data types, one can use this function to keep a type of data in certain columns. Here, the input will be the output by `typemix` function, name of the column (a vector of the name of columns) that they want to clean, the type of data they want to work on, and if we want to keep or delete the certain type. The output will be a data frame like the original one but with specified data type in certain columns deleted.
+    * The function helps to clean our data frame. After knowing where the mixture of data types is, one can use this function to keep/delete a type of data in certain columns. Here, the input will be an output by the `typemix` function, ID of the column(s) (the ID is the numbering of the column(s)) that they want to clean, the type of data they want to work on, and if they want to keep or delete the certain type. The output will be a data frame like the original one but with specified data type in the certain columns deleted.
 
 - `Missing Value Treatment` : Basic Imputation and EM Imputation -`em` and  `mmm`
     * Basic Imputation: function used `mmm` replace missing values in a column of a dataframe, or multiple columns of dataframe based on the `method` of imputation
@@ -67,27 +76,40 @@ Three main parts including different functions in `tidyplus`
 
 This is a basic example which shows you how to solve a common problem:
 
-#### Datatype cleansing
+#### Data type cleansing with typemix
 
-The section has two functions, typemix and cleanmix.
+```
+# prepare data frame
+import pandas as pd
+d={'x1':[1,2,3,"1.2.3"],
+   'x2':["test","test",1,True],
+   'x3':[True,True,False,False]}
+dat=pd.DataFrame(data=d)
 
-- The input for typemix function is a `data frame`, and the output is a list of 3 data frames. The first one is the same as the input data frame, the second one tells you the location and types of data in the columns where there is type mixture. The third data frame is a summary of the second data frame.
+# run the function
+typemix(dat)
 
-- The input for cleanmix function is the result from typemix function, the column(s) you want to work on, the type(s) of data you want to keep/delete, and if you want to keep/delete the instances specified.
+```
 
-```r
-dat<-data.frame(x1=c(1,2,3,"1.2.3"),
-                x2=c("test","test",1,TRUE),
-                x3=c(TRUE,TRUE,FALSE,FALSE))
+#### Data type cleansing with cleanmix
 
-typemix(dat) #
+```
+# prepare data frame
+import pandas as pd
+d={'x1':[1,2,3,"1.2.3"],
+   'x2':["test","test",1,True],
+   'x3':[True,True,False,False]}
+dat=pd.DataFrame(data=d)
+typemix(dat) # need result from typemix function as input
 
+# run the function
 cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
 ```
 
 #### Imputation with mean/ median / mode
 
 * Works on pandas dataframe
+
 ```
 from tidyplusPy import mmm
 
@@ -102,12 +124,13 @@ df = pd.DataFrame(columns, index=ID)
 df.index.name = 'ID'
 
 
-mmm.mmm(df,method = "mode") ### method can be changed to mean and median as well
+mmm(df,method = "mode") ### method can be changed to mean and median as well
 ```
 
 #### Imputation with EM
 
 * Works on ONLY on nd-array for now
+
 ```
 from tidyplusPy import EM
 
@@ -117,28 +140,24 @@ matrix[2,1] = np.nan
 matrix[4,2] = np.nan
 matrix[3,3] = np.nan
 
-EM.em(matrix)
+em(matrix)
 ```
 
-## Used Scenario
+## User Scenario
 
 Using Data Manipulation functionalities
 
-  * Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `Missing Value Treatment` to deal with missing data by EM algorithm. The `emphasizeon` function can be used to highlight the factors that he is interested in. After the wrangling of data, one can use function `Markdown Table` to output the data frame in a markdown format.
+  * Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `Missing Value Treatment` to deal with missing data by EM algorithm. After the wrangling of data, one can use function `Markdown Table` to output the data frame in a markdown format.
 
 
-## Existing features in Python ecosystem similar to `tidyplus`
+## Existing features in Python ecosystem similar to `tidyplusPy`
 
-* Data Manipulation
+* Data Type Cleansing
   - [Pandas:string processing](http://pandas.pydata.org/pandas-docs/stable/missing_data.html#string-regular-expression-replacement) function and [Pandas:string processing](http://pandas.pydata.org/pandas-docs/stable/missing_data.html#string-regular-expression-replacement). [Brief Version](https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Python_Pandas_Cheat_Sheet_2.pdf) The existing pandas version doesn't have a functionality to explicitly perform string processing/datatype conversion without affecting the overall column type (which is inconvenient when you have really messed up data with mix of strings and numbers)
 * Missing Value treatment
   - Python doesn't have imputation methods which use `EM algorithm` for missing value treatment, which in fact is very efficient and accurate [Imputation methods in python](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.Imputer.html#sklearn.preprocessing.Imputer)
 * Markdown table in Python
   * Python doesn't have a package or library which can output a dataset in the form of a markdown table (User defined)
-
-## Ideas subject to change
-
-* As a part of the initial proposal, the above ideas can be implemented. However, some functionalities are subject to change based on the project timeline or technical complexity
 
 ## License
 [MIT](LICENSE.md)
