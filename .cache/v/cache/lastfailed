@@ -1,6 +1,4 @@
 {
-  "tests/test_cleanmix.py::test_input": true,
-  "tests/test_cleanmix.py::test_output": true,
   "tests/test_em.py": true,
   "tests/test_md.py::Test_md::()::test_input1": true,
   "tests/test_md.py::Test_md::()::test_input2": true,

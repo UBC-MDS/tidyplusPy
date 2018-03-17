@@ -10,6 +10,7 @@ fname = os.path.join(os.path.dirname(__file__), 'data/test_sample.csv')
 sample=pd.read_csv(fname)
 fname = os.path.join(os.path.dirname(__file__), 'data/cleanmix_e1.csv')
 cleanmix_e1=pd.read_csv(fname)
+cleanmix_e1.iloc[3,0]=float('nan')
 cleanmix_e2=sample.copy()
 cleanmix_e2.iloc[3,0]=float('nan')
 result=typemix(sample)
@@ -29,15 +30,15 @@ def test_input():
         cleanmix(result,column=4,type="logical")
 
     with pytest.warns(UserWarning):
-        cleanmix(result,column=1,type="logical")
+        cleanmix(result,column=0,type="logical")
     
 # check the code accuracy
 def test_output():
     '''
     Check if the function gives us expected results.
     '''
-    assert pd.DataFrame.equals(cleanmix(result,column=[1,2],type=['number','characyer']), cleanmix_e1)
-    assert pd.DataFrame.equals(cleanmix(result,column=1,type="number"), cleanmix_e2)
-    assert pd.DataFrame.equals(cleanmix(result,column=1,type="character",keep=FALSE), cleanmix_e2)
+    assert pd.DataFrame.equals(cleanmix(result,column=[0,1],type=['number','character']), cleanmix_e1)
+    assert pd.DataFrame.equals(cleanmix(result,column=0,type="number"), cleanmix_e2)
+    assert pd.DataFrame.equals(cleanmix(result,column=0,type="character",keep=False), cleanmix_e2)
 
     
