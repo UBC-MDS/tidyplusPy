@@ -12,6 +12,7 @@
 
 [![issues](https://img.shields.io/github/issues/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/issues)
 
+[![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
 
 ## Contributors:
 
@@ -33,7 +34,7 @@ The `tidyplus` package is an essential data cleaning package with features like 
 
 
 ```
-pip install tidyplusPy
+pip install git+https://github.com/UBC-MDS/tidyplusPy.git
 
 import tidyplusPy
 ```
@@ -101,7 +102,7 @@ df = pd.DataFrame(columns, index=ID)
 df.index.name = 'ID'
 
 
-mmm(df,method = "mode") ### method can be changed to mean and median as well
+mmm.mmm(df,method = "mode") ### method can be changed to mean and median as well
 ```
 
 #### Imputation with EM
@@ -116,7 +117,7 @@ matrix[2,1] = np.nan
 matrix[4,2] = np.nan
 matrix[3,3] = np.nan
 
-em(matrix)
+EM.em(matrix)
 ```
 
 ## Used Scenario
