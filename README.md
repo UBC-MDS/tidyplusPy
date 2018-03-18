@@ -6,6 +6,8 @@
 
 [![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
 
+<img src="pythonlogo.PNG" align="right" border="none" width="250" height="250"/>
+
 ## Contributors:
 
 * `Akshi Chaudhary` : [@akshi8](https://github.com/akshi8)
@@ -16,8 +18,6 @@
 
 * Date : March 18, 2018
 * Release : v4
-
-<img src="pythonlogo.PNG" align="right" border="none" width="250" height="250"/>
 
 ## About
 
