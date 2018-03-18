@@ -1,24 +1,22 @@
 language: python
-notifications:
-    on_success: never
-    on_failure: always
 python:
   - "3.6"
+# command to install dependencies
 cache: pip3
+before_install:
+  - pip install pytest pytest-cov
+  - pip install coveralls
 install:
   - 'pip install -r requirements.txt'
-  - 'pip install codecov'
-  - 'pip install pytest-cov'
-os: "linux"
-dist: "trusty"
-addons:
-  apt:
-    packages:
-      - python-coverage
+# command to run tests
 script:
   - pytest
-  - py.test --cov-report= --cov=tidyplusPy tests/ 
-  - coverage report -m 
+  - pylint --errors-only --extension-pkg-whitelist=numpy tidyplusPy/
+  - py.test --cov=tidyplusPy tests/ --cov-branch
+os: "linux"
+dist: "trusty"
+notifications:
+    on_success: never
+    on_failure: never
 after_success:
-  - codecov
   - coveralls
