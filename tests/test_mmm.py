@@ -21,6 +21,29 @@ matrix[4,2] = np.nan
 matrix[3,3] = np.nan
 matrix[0,0] = np.nan
 
+d = pd.DataFrame(data=({'col1': [1], 'col2': ['a']}))
+d2 = pd.DataFrame(data=({'col1': [1,None,None], 'col2': ['a',None,None]}))
+d3 = pd.DataFrame(data=({'col1': [1,2,None], 'col2': ['a',None,'c']}))
+
+d4 = pd.DataFrame(data=({'col1': [True,False,None], 'col2': ['a',None,'c']}))
+e = pd.DataFrame(data=({'col2': ['a',None,'c']}))
+
+
+df = pd.DataFrame(data=({'v_num': [4,np.nan,5,6,7,np.nan,9]}))
+df2 = pd.DataFrame(data=({'v_char': ['one','two',None,'two','two','two']}))
+
+mean_out = mmm.mmm(df,method="mean")
+df_mean = pd.DataFrame(data=({'v_num': [4,6.2,5,6,7,6.2,9]}))
+
+
+med_out = mmm.mmm(df,method="median")
+df_med = pd.DataFrame(data=({'v_num': [4,6,5,6,7,6,9]}))
+
+
+mod_out = mmm.mmm(df2,method="mode")
+df_mod = pd.DataFrame(data=({'v_char': ['one','two','two','two','two','two']}))
+
+
 # Usage
 
 # mmm.mmm(data,method="mode")
@@ -67,7 +90,7 @@ def row_input():
     """
   
     # check if dataframe has more than 1 row
-    d = pd.DataFrame(data=({'col1': [1], 'col2': ['a']}))
+    # d = pd.DataFrame(data=({'col1': [1], 'col2': ['a']}))
     with pytest.raises(TypeError):
        mmm.mmm(d,method = "mean")
     with pytest.raises(TypeError):
@@ -85,13 +108,13 @@ def more_missing():
 
     # dataframe with less than 2 non-missing
     
-    d = pd.DataFrame(data=({'col1': [1,None,None], 'col2': ['a',None,None]}))
+    # d = pd.DataFrame(data=({'col1': [1,None,None], 'col2': ['a',None,None]}))
     with pytest.raises(ValueError):
-       mmm.mmm(d,method = "mean")
+       mmm.mmm(d2,method = "mean")
     with pytest.raises(ValueError):
-       mmm.mmm(d,method = "median")
+       mmm.mmm(d2,method = "median")
     with pytest.raises(ValueError):
-       mmm.mmm(d,method ="mode")       
+       mmm.mmm(d2,method ="mode")       
         
        
 def method_check():
@@ -101,16 +124,16 @@ def method_check():
     
     """
     
-    d = pd.DataFrame(data=({'col1': [1,2,None], 'col2': ['a',None,'c']}))
+   # d = pd.DataFrame(data=({'col1': [1,2,None], 'col2': ['a',None,'c']}))
     
     with pytest.raises(Exception):
-       mmm.mmm(d,method ="max")
+       mmm.mmm(d3,method ="max")
     with pytest.raises(Exception):
-       mmm.mmm(d,"")
+       mmm.mmm(d3,"")
     with pytest.raises(Exception):
-       mmm.mmm(d)   
+       mmm.mmm(d3)   
     with pytest.raises(Exception):
-       mmm.mmm(d,method = 1) 
+       mmm.mmm(d3,method = 1) 
        
 def numeric_col() :
     
@@ -122,13 +145,13 @@ def numeric_col() :
     
     """
     
-    d = pd.DataFrame(data=({'col1': [True,False,None], 'col2': ['a',None,'c']}))
-    e = pd.DataFrame(data=({'col2': ['a',None,'c']}))
+    #d = pd.DataFrame(data=({'col1': [True,False,None], 'col2': ['a',None,'c']}))
+    #e = pd.DataFrame(data=({'col2': ['a',None,'c']}))
     
     with pytest.raises(Exception):
-       mmm.mmm(d,method = "mean")
+       mmm.mmm(d4,method = "mean")
     with pytest.raises(Exception):
-       mmm.mmm(d,method = "median")
+       mmm.mmm(d4,method = "median")
        
     with pytest.raises(Exception):
        mmm.mmm(e,method = "mean")
@@ -145,22 +168,19 @@ def outputs():
     
     # check for mmm
     
-    df = pd.DataFrame(data=({'v_num': [4,np.nan,5,6,7,np.nan,9]}))
-    df2 = pd.DataFrame(data=({'v_char': ['one','two',None,'two','two','two']}))
+    # df = pd.DataFrame(data=({'v_num': [4,np.nan,5,6,7,np.nan,9]}))
+    # df2 = pd.DataFrame(data=({'v_char': ['one','two',None,'two','two','two']}))
     
-    mean_out = mmm.mmm(df,method="mean")
-    df_mean = pd.DataFrame(data=({'v_num': [4,6.2,5,6,7,6.2,9]}))
+   # mean_out = mmm.mmm(df,method="mean")
+   # df_mean = pd.DataFrame(data=({'v_num': [4,6.2,5,6,7,6.2,9]}))
     assert np.array_equal(mean_out,df_mean)
     
-    med_out = mmm.mmm(df,method="median")
-    df_med = pd.DataFrame(data=({'v_num': [4,6,5,6,7,6,9]}))
+   # med_out = mmm.mmm(df,method="median")
+   # df_med = pd.DataFrame(data=({'v_num': [4,6,5,6,7,6,9]}))
     assert np.array_equal(med_out,df_med)
     
-    mod_out = mmm.mmm(df2,method="mode")
-    df_mod = pd.DataFrame(data=({'v_char': ['one','two','two','two','two','two']}))
+    #mod_out = mmm.mmm(df2,method="mode")
+   # df_mod = pd.DataFrame(data=({'v_char': ['one','two','two','two','two','two']}))
     assert np.array_equal(mod_out,df_mod)
     
-    
-    
-
-    
+ 
