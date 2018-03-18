@@ -78,9 +78,6 @@ def md_new(nrow = 2, ncol = 2, align = None, header = None):
         al.append("|")
         al = "".join(al)
 
-    else:
-        raise InputError("Expect a string of 'l', 'c', or 'r'")
-
     # header
     if header == None:
         top = row
