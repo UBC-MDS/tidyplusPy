@@ -5,7 +5,6 @@ import numpy as np
 import pandas as pd
 import six
 
-
 def mmm(data, method= "mean/median/mode"):
     """Multivariate Imputation by Mean, median or mode
     ----------
@@ -45,7 +44,7 @@ def mmm(data, method= "mean/median/mode"):
         raise TypeError('dataframe should have more than one row')
     for i in range(0,len(list(data.count()))):
         if list(data.count())[i] < 2:
-            raise ValueError('dataframe should have atleast one not-null value in each column')
+            raise ValueError('dataframe should have atleast two not-null value in each column')
 
     
 
@@ -53,32 +52,32 @@ def mmm(data, method= "mean/median/mode"):
     
     df_num = df._get_numeric_data() ### Get only numeric columns from dataframe
     
-    if df_num.shape[1] == 0 :
-        raise Exception("No numeric columns, mean and median imputation not valid")
-    if (df_num.shape[1] > 0 and method == "mode") :
+    if (method == "mode") :
         result = df.apply(lambda x: x.fillna(x.mode()[0]),axis=0) ## this is applied to both numeric and character values
-    if df_num.shape[1] > 0 :
-        if method == "mean" :
-            out = df_num.apply(lambda x: x.fillna(x.mean()),axis=0)
-            a = []
-            for i in df.columns.values.tolist() :
-                if i not in out.columns.values.tolist() :
-                    a.append(i)     ## Step to identify non-numeric columns
     
-            result = pd.concat([out, df.ix[:,a]], axis=1) # merge all columns for result
-        
-        
-        elif method == "median" :
-            out = df_num.apply(lambda x: x.fillna(x.median()),axis=0) ### Get only numeric columns from dataframe
-            a = []
-            for i in df.columns.values.tolist() :
-                if i not in out.columns.values.tolist() :
-                    a.append(i)  ## Step to identify non-numeric columns
-    
-            result = pd.concat([out, df.ix[:,a]], axis=1) # merge all columns for result
-    
+    if (method != "mode" and df_num.shape[1] == 0):
+        raise Exception("No numeric columns, mean and median imputation not valid")
     else :
-        print("missing can't be imputed")
+            if df_num.shape[1] > 0 :
+                if method == "mean" :
+                    out = df_num.apply(lambda x: x.fillna(x.mean()),axis=0)
+                    a = []
+                    for i in df.columns.values.tolist() :
+                        if i not in out.columns.values.tolist() :
+                            a.append(i)     ## Step to identify non-numeric columns
+            
+                    result = pd.concat([out, df.ix[:,a]], axis=1) # merge all columns for result
+                
+                
+                elif method == "median" :
+                    out = df_num.apply(lambda x: x.fillna(x.median()),axis=0) ### Get only numeric columns from dataframe
+                    a = []
+                    for i in df.columns.values.tolist() :
+                        if i not in out.columns.values.tolist() :
+                            a.append(i)  ## Step to identify non-numeric columns
+            
+                    result = pd.concat([out, df.ix[:,a]], axis=1) # merge all columns for result
+            
     
     return result ## imputed dataset
 

@@ -6,7 +6,6 @@ import numpy as np
 import random
 
 
-
 def em(data):
     """ Imputes data using expectation maximization.
     E-step: Calculates the expected value of missing data  based on log likelihood ratio.
@@ -40,7 +39,7 @@ def em(data):
         raise TypeError('array should have more than one row')
     for i in range(0,data.shape[1]):
         if np.count_nonzero(~np.isnan(data[:,i])) < 1:
-            raise ValueError('array should have atleast one not-null value in each column')
+            raise ValueError('array should have atleast two not-null value in each column')
     while len(np.argwhere(np.isnan(data))) > 0: ## run this step to update all columns in the matrix
         em_run(data)
     return data
