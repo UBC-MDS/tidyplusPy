@@ -50,10 +50,10 @@ def mmm(data, method= "mean/median/mode"):
 
     df = data
     
-    df_num = df._get_numeric_data() ### Get only numeric columns from dataframe
+    df_num = df._get_numeric_data() # Get only numeric columns from dataframe
     
     if (method == "mode") :
-        result = df.apply(lambda x: x.fillna(x.mode()[0]),axis=0) ## this is applied to both numeric and character values
+        result = df.apply(lambda x: x.fillna(x.mode()[0]),axis=0) # this is applied to both numeric and character values
     
     if (method != "mode" and df_num.shape[1] == 0):
         raise Exception("No numeric columns, mean and median imputation not valid")
@@ -64,22 +64,22 @@ def mmm(data, method= "mean/median/mode"):
                     a = []
                     for i in df.columns.values.tolist() :
                         if i not in out.columns.values.tolist() :
-                            a.append(i)     ## Step to identify non-numeric columns
+                            a.append(i)     # Step to identify non-numeric columns
             
                     result = pd.concat([out, df.ix[:,a]], axis=1) # merge all columns for result
                 
                 
                 elif method == "median" :
-                    out = df_num.apply(lambda x: x.fillna(x.median()),axis=0) ### Get only numeric columns from dataframe
+                    out = df_num.apply(lambda x: x.fillna(x.median()),axis=0) # Get only numeric columns from dataframe
                     a = []
                     for i in df.columns.values.tolist() :
                         if i not in out.columns.values.tolist() :
-                            a.append(i)  ## Step to identify non-numeric columns
+                            a.append(i)  # Step to identify non-numeric columns
             
                     result = pd.concat([out, df.ix[:,a]], axis=1) # merge all columns for result
             
     
-    return result ## imputed dataset
+    return result # imputed dataset
 
 
 
