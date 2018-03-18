@@ -103,7 +103,7 @@ cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
 * Works on pandas dataframe
 
 ```Python
-from tidyplusPy import mmm
+from tidyplusPy import mmm as tm
 
 NaN = float('nan')
 ID = [1, 2, 3, 4, 5, 6, 7]
@@ -116,7 +116,7 @@ df = pd.DataFrame(columns, index=ID)
 df.index.name = 'ID'
 
 
-mmm(df,method = "mode") ### method can be changed to mean and median as well
+tm.mmm(df,method = "mode") ### method can be changed to mean and median as well
 ```
 
 #### Imputation with EM
@@ -124,7 +124,7 @@ mmm(df,method = "mode") ### method can be changed to mean and median as well
 * Works on ONLY on nd-array for now
 
 ```Python
-from tidyplusPy import EM
+from tidyplusPy import EM as te
 
 matrix= np.random.rand(5,4)
 matrix[1,0] = np.nan
@@ -132,7 +132,7 @@ matrix[2,1] = np.nan
 matrix[4,2] = np.nan
 matrix[3,3] = np.nan
 
-em(matrix)
+te.em(matrix)
 ```
 
 #### Create empty markdown table
