@@ -79,3 +79,112 @@ def test_input():
     with pytest.raises(TypeError):
         mmm.mmm(['a','b'],method ="median")
         
+def row_input():
+    
+    """
+    Checks row input in dataframe
+    
+    dataframe need more than 1 rows to estimate missing
+    
+    """
+  
+    # check if dataframe has more than 1 row
+    # d = pd.DataFrame(data=({'col1': [1], 'col2': ['a']}))
+    with pytest.raises(TypeError):
+       mmm.mmm(d,method = "mean")
+    with pytest.raises(TypeError):
+       mmm.mmm(d,method = "median")
+    with pytest.raises(TypeError):
+       mmm.mmm(d,method = "mode")  
+       
+def more_missing():
+    
+    """
+    Checks if array or dataframe columns have atleast 2 non-missing for imputing
+    
+   Mean, Mode, Median all need atleast two not null values to estimate missing
+    """
+
+    # dataframe with less than 2 non-missing
+    
+    # d = pd.DataFrame(data=({'col1': [1,None,None], 'col2': ['a',None,None]}))
+    with pytest.raises(ValueError):
+       mmm.mmm(d2,method = "mean")
+    with pytest.raises(ValueError):
+       mmm.mmm(d2,method = "median")
+    with pytest.raises(ValueError):
+       mmm.mmm(d2,method ="mode")       
+        
+       
+def method_check():
+    
+    """
+    Error check if method in mmm is not in ("mean","median","mode")
+    
+    """
+    
+   # d = pd.DataFrame(data=({'col1': [1,2,None], 'col2': ['a',None,'c']}))
+    
+    with pytest.raises(Exception):
+       mmm.mmm(d3,method ="max")
+    with pytest.raises(Exception):
+       mmm.mmm(d3,"")
+    with pytest.raises(Exception):
+       mmm.mmm(d3)   
+    with pytest.raises(Exception):
+       mmm.mmm(d3,method = 1) 
+       
+def numeric_col() :
+    
+    """
+    
+    Checks if dataframe given to mean and median imputation has numeric column
+    
+    Mean and Median only work with numeric columns, dataframe with non-numeric columns should be invalid
+    
+    """
+    
+    #d = pd.DataFrame(data=({'col1': [True,False,None], 'col2': ['a',None,'c']}))
+    #e = pd.DataFrame(data=({'col2': ['a',None,'c']}))
+    
+    with pytest.raises(Exception):
+       mmm.mmm(d4,method = "mean")
+    with pytest.raises(Exception):
+       mmm.mmm(d4,method = "median")
+       
+    with pytest.raises(Exception):
+       mmm.mmm(e,method = "mean")
+    with pytest.raises(Exception):
+       mmm.mmm(e,method = "median")
+       
+def outputs():
+    
+    """
+    check if mmm return expected output
+    
+    """
+
+    
+    # check for mmm
+    
+    # df = pd.DataFrame(data=({'v_num': [4,np.nan,5,6,7,np.nan,9]}))
+    # df2 = pd.DataFrame(data=({'v_char': ['one','two',None,'two','two','two']}))
+    
+   # mean_out = mmm.mmm(df,method="mean")
+   # df_mean = pd.DataFrame(data=({'v_num': [4,6.2,5,6,7,6.2,9]}))
+    assert np.array_equal(mean_out,df_mean)
+    
+   # med_out = mmm.mmm(df,method="median")
+   # df_med = pd.DataFrame(data=({'v_num': [4,6,5,6,7,6,9]}))
+    assert np.array_equal(med_out,df_med)
+    
+    #mod_out = mmm.mmm(df2,method="mode")
+   # df_mod = pd.DataFrame(data=({'v_char': ['one','two','two','two','two','two']}))
+    assert np.array_equal(mod_out,df_mod)
+    
+    
+    
+    
+    
+    
+
