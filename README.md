@@ -1,17 +1,20 @@
-# TidyPlusPy: a tool for data wrangling
+
+# **tidyplusPy**: a tool for data wrangling in Python
+
+
 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
-[![HitCount](https://hitt.herokuapp.com/tidyplus_python.svg..)](https://github.com/tidyplus_python)
-
-[![GitHub commit](https://img.shields.io/github/commits-since/UBC-MDS/tidyplus_python/v0.svg)](https://github.com/UBC-MDS/tidyplus_python/commit)
-
-[![Downloads](https://img.shields.io/github/downloads/UBC-MDS/tidyplus_python/total.svg)](https://github.com/UBC-MDS/tidyplus_python/graphs/traffic)
-
 [![forks](https://img.shields.io/github/forks/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/network)
+
+
+[![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
 
 [![issues](https://img.shields.io/github/issues/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/issues)
 
+
+
+<img src="pythonlogo.PNG" align="right" border="none" width="250" height="250"/>
 
 ## Contributors:
 
@@ -21,8 +24,10 @@
 
 ## Latest
 
-* Date : March 17, 2018
-* Release : v4.0
+
+* Date : March 18, 2018
+* Release : v4
+
 
 ## About
 
