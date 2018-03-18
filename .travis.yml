@@ -1,17 +1,24 @@
 language: python
+notifications:
+    on_success: never
+    on_failure: always
 python:
   - "3.6"
-# command to install dependencies
+cache: pip3
 install:
-  - pip install git+https://github.com/UBC-MDS/tidyplusPy.git
-  - pip install -r requirements.txt
-  - pip install codecov
-  - pip install -U pytest
-# command to run tests
+  - 'pip install -r requirements.txt'
+  - 'pip install codecov'
+  - 'pip install pytest-cov'
+os: "linux"
+dist: "trusty"
+addons:
+  apt:
+    packages:
+      - python-coverage
 script:
   - pytest
-  - pytest --cov=./
-
-
+  - py.test --cov-report= --cov=tidyplusPy tests/ 
+  - coverage report -m 
 after_success:
   - codecov
+  - coveralls
