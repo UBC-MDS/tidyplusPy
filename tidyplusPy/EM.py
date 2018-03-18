@@ -81,8 +81,7 @@ def em_run(data, loops=20):
             data[x_i][y_i] = col[x_i]
             previous = col[x_i]
         return data
-    else:
-        raise Exception("Other dtypes not supported yet.")
+
     
 
 
