@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pytest
 import pandas as pd
 import numpy as np
