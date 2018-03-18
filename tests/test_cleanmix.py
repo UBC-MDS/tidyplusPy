@@ -31,6 +31,13 @@ def test_input():
 
     with pytest.warns(UserWarning):
         cleanmix(result,column=0,type="logical")
+
+    with pytest.warns(UserWarning):
+        cleanmix(result,column=[4],type=["logical"])
+    
+    with pytest.warns(UserWarning):
+        cleanmix(result,column=[0],type=["logical"])
+
     
 # check the code accuracy
 def test_output():
@@ -40,5 +47,6 @@ def test_output():
     assert pd.DataFrame.equals(cleanmix(result,column=[0,1],type=['number','character']), cleanmix_e1)
     assert pd.DataFrame.equals(cleanmix(result,column=0,type="number"), cleanmix_e2)
     assert pd.DataFrame.equals(cleanmix(result,column=0,type="character",keep=False), cleanmix_e2)
+    assert pd.DataFrame.equals(cleanmix(result,column=[0],type=["character"],keep=False), cleanmix_e2)
 
     
