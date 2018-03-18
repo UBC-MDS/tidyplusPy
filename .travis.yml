@@ -9,7 +9,8 @@ install:
 # command to run tests
 script:
   - pytest
-  - pytest --cov
+  - py.test --cov=./tests/
+
 
 after_success:
   - codecov
