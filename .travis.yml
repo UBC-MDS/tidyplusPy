@@ -17,6 +17,6 @@ addons:
       - python-coverage
 script:
   - pytest
-  - pytest --cov=./
+  - pytest --cov=tidyplusPy tests/
 after_success:
   - codecov
