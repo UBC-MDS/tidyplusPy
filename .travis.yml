@@ -2,10 +2,14 @@ language: python
 python:
   - "3.6"
 # command to install dependencies
-install: 
+install:
   - pip install git+https://github.com/UBC-MDS/tidyplusPy.git
   - pip install -r requirements.txt
   - pip install -U pytest
 # command to run tests
-script: pytest
+script:
+  - pytest
+  - pytest --cov
 
+after_success:
+  - codecov
