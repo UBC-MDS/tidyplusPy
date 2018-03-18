@@ -184,8 +184,9 @@ def test_outputs():
 def test_append():
     
     mmm.mmm(data,"mean")
+    mmm.mmm(data,"median")
     
-#    
+    
     
     
     
