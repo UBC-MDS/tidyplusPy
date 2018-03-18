@@ -3,8 +3,9 @@
 
 
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)  [![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
-
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
+[![codecov](https://codecov.io/gh/UBC-MDS/tidyplusPy/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/tidyplusPy)
 
 <img src="pythonlogo.PNG" align="right" border="none" width="250" height="250"/>
 
