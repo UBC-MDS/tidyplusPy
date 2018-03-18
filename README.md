@@ -3,15 +3,7 @@
 
 
 
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
-
-[![forks](https://img.shields.io/github/forks/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/network)
-
-
-[![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
-
-[![issues](https://img.shields.io/github/issues/UBC-MDS/tidyplus_python.svg)](https://github.com/UBC-MDS/tidyplus_python/issues)
-
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)  [![Build Status](https://travis-ci.org/UBC-MDS/tidyplusPy.svg?branch=master)](https://travis-ci.org/UBC-MDS/tidyplusPy)
 
 
 <img src="pythonlogo.PNG" align="right" border="none" width="250" height="250"/>
@@ -46,24 +38,23 @@ pip install git+https://github.com/UBC-MDS/tidyplusPy.git
 pip install https://github.com/UBC-MDS/tidyplusPy/zipball/master
 ```
 
-There are 5 functions, typemix, cleanmix, EM, md and mmm, in the package "tidyplusPy". To import the package and call functions in the package, do:
+There are 5 functions, `typemix`, `cleanmix`, `EM`, `md` and `mmm`, in the package "tidyplusPy". To import the package and call functions in the package, do:
 ```
 import tidyplusPy
 
-# To use a function, you need call it twice, like:
 typemix.typemix()
 ```
 
 ## Functions included:
 Three main parts including different functions in `tidyplusPy`
-- `Data Type Cleansing` :
+- **Data Type Cleansing** :
   - `typemix`
     * The function helps to find the columns containing different types of data, like character and numeric. The input of the function is a data frame, and the output of the function will be a list of 3 data frames reporting details about the mixture of data types. The first data frame in the list is the same as the input data frame, the second one tells you the location and types of data in the columns where there is type mixture. The third data frame is a summary of the second data frame.
 
   - `cleanmix`
     * The function helps to clean our data frame. After knowing where the mixture of data types is, one can use this function to keep/delete a type of data in certain columns. Here, the input will be an output by the `typemix` function, ID of the column(s) (the ID is the numbering of the column(s)) that they want to clean, the type of data they want to work on, and if they want to keep or delete the certain type. The output will be a data frame like the original one but with specified data type in the certain columns deleted.
 
-- `Missing Value Treatment` : Basic Imputation and EM Imputation -`em` and  `mmm`
+- **Missing Value Treatment** : Basic Imputation and EM Imputation -`em` and  `mmm`
     * Basic Imputation: function used `mmm` replace missing values in a column of a dataframe, or multiple columns of dataframe based on the `method` of imputation
 
       - (Method = 'Mean') replace using mean
@@ -72,10 +63,8 @@ Three main parts including different functions in `tidyplusPy`
     * EM Imputation: **Bonus** function used `em` (method = "EM")
       - Uses EM(Expectation- Maximization) algorithm to predict the closest value to the missing value
       - Can be used for both numeric and categorical predictions
-- `Markdown Table`:
-  - `md_new()`: This function creates a bare bone for generating a markdown table. Alignments, padding, and size of the table can be input by users.
-  - `md_data()`: This function converts a dataframe or matrix into a markdown table format.
-  - `md_reg()`: This function converts a regression model object into a nice-formatted markdown table.
+- **Markdown Table**:
+  - `md_new()`: This function creates a bare bone for generating a markdown.
 
 ## Example
 
@@ -83,7 +72,7 @@ This is a basic example which shows you how to solve a common problem:
 
 #### Data type cleansing with typemix
 
-```
+```Python
 # prepare data frame
 import pandas as pd
 d={'x1':[1,2,3,"1.2.3"],
@@ -98,7 +87,7 @@ typemix(dat)
 
 #### Data type cleansing with cleanmix
 
-```
+```Python
 # prepare data frame
 import pandas as pd
 d={'x1':[1,2,3,"1.2.3"],
@@ -115,7 +104,7 @@ cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
 
 * Works on pandas dataframe
 
-```
+```Python
 from tidyplusPy import mmm
 
 NaN = float('nan')
@@ -136,7 +125,7 @@ mmm(df,method = "mode") ### method can be changed to mean and median as well
 
 * Works on ONLY on nd-array for now
 
-```
+```Python
 from tidyplusPy import EM
 
 matrix= np.random.rand(5,4)
@@ -148,11 +137,29 @@ matrix[3,3] = np.nan
 em(matrix)
 ```
 
+#### Create empty markdown table
+
+```Python
+from tidyplusPy import md
+
+tbl1 = md.md_new()
+# print out the table in markdown syntax
+print(tbl1)
+
+# create table of size 3x3; alignment to center
+tbl2 = md.md_new(nrow = 3, ncol = 3, align = "c")
+print(tbl2)
+
+# provide header
+tbl3 = md.md_new(header = ["foo","boo"])
+print(tbl3)
+```
+
 ## User Scenario
 
 Using Data Manipulation functionalities
 
-  * Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `Missing Value Treatment` to deal with missing data by EM algorithm. After the wrangling of data, one can use function `Markdown Table` to output the data frame in a markdown format.
+  * Users can use the package when they want to clean and wrangle their data. For example, if the data has not been cleaned yet, users can use function `typemix` to check where data is not clean and use `cleanmix` to clean data. Based on personal work experience, the mix of number and character is usually seen in the data collected from the survey. After clean data is ready, one can use the `Missing Value Treatment` to deal with missing data by EM algorithm. You can use `md_new()` to create a empty markdown table.
 
 
 ## Existing features in Python ecosystem similar to `tidyplusPy`
