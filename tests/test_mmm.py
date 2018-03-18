@@ -68,11 +68,11 @@ def row_input():
   
     # check if dataframe has more than 1 row
     d = pd.DataFrame(data=({'col1': [1], 'col2': ['a']}))
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
        mmm.mmm(d,method = "mean")
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
        mmm.mmm(d,method = "median")
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
        mmm.mmm(d,method = "mode")  
        
 def more_missing():
@@ -162,16 +162,5 @@ def outputs():
     
     
     
-    
-    
-    
-    
-    
 
-    
-    
-     
-            
-    
-    
     
