@@ -73,13 +73,15 @@ This is a basic example which shows you how to solve a common problem:
 ```Python
 # prepare data frame
 import pandas as pd
+import tidyplusPy
+
 d={'x1':[1,2,3,"1.2.3"],
    'x2':["test","test",1,True],
    'x3':[True,True,False,False]}
 dat=pd.DataFrame(data=d)
 
 # run the function
-typemix(dat)
+typemix.typemix(dat)
 
 ```
 
@@ -88,14 +90,16 @@ typemix(dat)
 ```Python
 # prepare data frame
 import pandas as pd
+import tidyplusPy
+
 d={'x1':[1,2,3,"1.2.3"],
    'x2':["test","test",1,True],
    'x3':[True,True,False,False]}
 dat=pd.DataFrame(data=d)
-typemix(dat) # need result from typemix function as input
+result=typemix.typemix(dat) # need result from typemix function as input
 
 # run the function
-cleanmix(typemix(dat),column=c(1,2),type=c("number","character"))
+cleanmix.cleanmix(result,column=c(1,2),type=c("number","character"))
 ```
 
 #### Imputation with mean/ median / mode

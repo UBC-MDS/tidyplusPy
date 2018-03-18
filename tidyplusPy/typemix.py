@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 def typemix(df):
     '''
     The function helps to find the columns in a data frame that contains different types of data.
