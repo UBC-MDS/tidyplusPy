@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 
 import numpy as np
@@ -71,3 +72,51 @@ def test_input():
         em.em((0, np.nan, 2))
         
 
+        
+def row_input():
+    
+    """
+    Checks row input in nd array and dataframe
+    
+    nd array need more than 1 rows to estimate missing
+    
+    """
+    
+
+    
+    with pytest.raises(ValueError):
+       em.em(empty_array)
+       
+    with pytest.raises(ValueError):
+       em.em(a)
+       
+
+def more_missing():
+    
+    """
+    Checks if array columns have atleast 2 non-missing for imputing
+    
+    EMneed atleast two not null values to estimate missing
+    """
+    
+    # Array with less than 2 non - missing
+
+    with pytest.raises(ValueError):
+       em.em(a1)
+   
+
+       
+
+       
+def outputs():
+    
+    """
+    check if EM return expected output
+    
+    """
+    
+    
+    # check for EM
+
+    
+    assert np.array_equal(e,b)
