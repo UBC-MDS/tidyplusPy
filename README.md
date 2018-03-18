@@ -30,7 +30,7 @@ The `tidyplusPy` package is an essential data cleaning package with features lik
 
 The package needs to be installed from GitHub. Open your Anaconda or Terminal, and type in:
 
-```
+```bash
 # if you have git installed in your computer already, try:
 pip install git+https://github.com/UBC-MDS/tidyplusPy.git
 
@@ -38,11 +38,9 @@ pip install git+https://github.com/UBC-MDS/tidyplusPy.git
 pip install https://github.com/UBC-MDS/tidyplusPy/zipball/master
 ```
 
-There are 5 functions, `typemix`, `cleanmix`, `EM`, `md` and `mmm`, in the package "tidyplusPy". To import the package and call functions in the package, do:
-```
+There are 5 functions, `typemix`, `cleanmix`, `EM`, `md` and `mmm`, in the package **tidyplusPy**. To import the package:
+```Python
 import tidyplusPy
-
-typemix.typemix()
 ```
 
 ## Functions included:
