@@ -183,7 +183,7 @@ def test_outputs():
     
 def test_append():
     
-    assert not i not in data.columns.values.tolist()
+    mmm.mmm(data,"mean")
     
 #    
     
