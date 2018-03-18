@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import numpy as np
 import pytest
@@ -40,16 +40,17 @@ def test_input():
 
     # Check EM datatypes other than numpy nd.array
     with pytest.raises(TypeError):
-        em.em('some string' )
+        em.em('some string')
+
 
     with pytest.raises(TypeError):
-        em.em( False )
+        em.em(2)
 
     with pytest.raises(TypeError):
-        em.em( 2 )
+        em.em(False)
 
     with pytest.raises(TypeError):
-        em.em( (0, np.nan, 2) )
+        em.em((0, np.nan, 2))
         
    # Check MMM input other than pandas dataframe
         
