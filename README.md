@@ -175,6 +175,9 @@ Using Data Manipulation functionalities
 * Markdown table in Python
   * Python doesn't have a package or library which can output a dataset in the form of a markdown table (User defined)
 
+## Branch coverage
+![](tests/full_coverage.png)
+
 ## License
 [MIT](LICENSE.md)
 
