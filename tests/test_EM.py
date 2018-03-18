@@ -83,8 +83,8 @@ def test_row_input():
     
 
     
-    with pytest.raises(ValueError):
-       em.em(np.array([]))
+    with pytest.raises(TypeError):
+       em.em(a)
        
 
        
@@ -100,7 +100,7 @@ def test_more_missing():
     # Array with less than 2 non - missing
 
     with pytest.raises(ValueError):
-       em.em(np.array([[1, np.nan, 3], [4, 5, np.nan]]))
+       em.em(a1)
    
 
        
