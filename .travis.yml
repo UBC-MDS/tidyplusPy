@@ -11,7 +11,7 @@ install:
 # command to run tests
 script:
   - pytest
-  - pylint --errors-only --extension-pkg-whitelist=numpy pypunisher/
+  - pylint --errors-only --extension-pkg-whitelist=numpy tidyplusPy/
   - py.test --cov=tidyplusPy tests/ --cov-branch
 os: "linux"
 dist: "trusty"
