@@ -183,4 +183,18 @@ def outputs():
    # df_mod = pd.DataFrame(data=({'v_char': ['one','two','two','two','two','two']}))
     assert np.array_equal(mod_out,df_mod)
     
- 
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+     
+            
+    
+    
+    

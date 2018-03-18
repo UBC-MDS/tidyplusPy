@@ -21,6 +21,28 @@ matrix[4,2] = np.nan
 matrix[3,3] = np.nan
 matrix[0,0] = np.nan
 
+empty_array = np.array([])
+
+# Array should have more than 1 row
+a = np.random.rand(1,3)
+a[0,0] = None
+a[0,2] = np.nan
+a[0,0] = np.nan
+
+
+
+a1 = np.random.rand(2,5)
+a1[0,0] = None
+a1[0,2] = np.nan
+a1[1,0] = np.nan
+
+
+a2 = np.array([[1, np.nan, 3], [4, 5, np.nan]])
+e = em.em(a2)
+b = np.array([[1, 5, 3], [4, 5, 3]])
+
+
+
 
 
 def test_input():
@@ -59,16 +81,10 @@ def row_input():
     
     """
     
-    empty_array = np.array([])
-    
-    # Array should have more than 1 row
-    a = np.random.rand(1,3)
-    a[0,0] = None
-    a[0,2] = np.nan
-    a[0,0] = np.nan
+
     
     with pytest.raises(ValueError):
-       em.em( empty_array )
+       em.em(empty_array)
        
     with pytest.raises(ValueError):
        em.em(a)
@@ -83,13 +99,9 @@ def more_missing():
     """
     
     # Array with less than 2 non - missing
-    a = np.random.rand(2,5)
-    a[0,0] = None
-    a[0,2] = np.nan
-    a[1,0] = np.nan
 
     with pytest.raises(ValueError):
-       em.em(a)
+       em.em(a1)
    
 
        
@@ -104,9 +116,7 @@ def outputs():
     
     
     # check for EM
-    a = np.array([[1, np.nan, 3], [4, 5, np.nan]])
-    e = em.em(a)
-    b = np.array([[1, 5, 3], [4, 5, 3]])
+
     
     assert np.array_equal(e,b)
     
