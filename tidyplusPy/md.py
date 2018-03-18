@@ -1,13 +1,21 @@
+#!/usr/bin/env python
+
 def md_new(nrow = 2, ncol = 2, align = None, header = None):
     '''
     Creates a bare bone for generating a markdown table. Alignments and size of the table can be input by users.
 
-    Parameters:
-        ncol, nrow : positive integer number of columns and row for the markdown table
-        align   : Column alignment: a string of 'l' (left), 'c' (center) or 'r' (right). If align = 'l', all columns are left aligned. e.t.c.
-        header   : A string list of len(header) = ncol to be used for the header of the table. Default None.
+    Args:
+        ncol, nrow (int): positive integer number of columns and row for the markdown table
+
+        align (str): Column alignment: a string of 'l' (left), 'c' (center) or 'r' (right). 
+			If align = 'l', all columns are left aligned. e.t.c.
+
+        header (str or list): A string list of len(header) = ncol to be used for the header of the table. Default None.
+
+
     Return:
-        A string of the markdown source code
+	tbl (str): A string of markdown table with '\n' to seperate rows. 
+			Use 'print(tbl)' to get the final markdown syntax.
 
     '''
 
@@ -17,14 +25,14 @@ def md_new(nrow = 2, ncol = 2, align = None, header = None):
         """
         pass
 
-    ## check type of ncol and nrow
+    # check type of ncol and nrow
     if not isinstance(ncol, int) or not isinstance(nrow, int) :
         raise TypeError("'ncol' and 'nrow' expect positive integer number")
 
     if ncol <=0 or nrow <=0 :
         raise InputError("'ncol' and 'nrow' expect positive integer number")
 
-    ## check type of align:
+    # check type of align:
     if not align == None:
         if not isinstance(align, str):
             raise TypeError("Expect a string of 'l', 'c', or 'r'")
@@ -33,7 +41,7 @@ def md_new(nrow = 2, ncol = 2, align = None, header = None):
         if not align in ["l", "c", "r"]:
             raise InputError("'align' should be either 'l', 'c', or 'r'")
 
-    ## check type of header:
+    # check type of header:
     if not header == None:
         if not all(isinstance(n, str) for n in header) or not isinstance(header,list):
             raise TypeError("Expect a list of strings")
@@ -68,14 +76,13 @@ def md_new(nrow = 2, ncol = 2, align = None, header = None):
     if header == None:
         top = row
     else:
-        h =[]
+        head_name =[]
         for name in header:
             head = ["| ", name]
-            h.extend(head)
-        h.append("|")
-        top = "".join(h)
+            head_name.extend(head)
+        head_name.append("|")
+        top = "".join(head_name)
 
     tbl = [top, al, rows]
     tbl = "\n".join(tbl)
-    print(tbl)
     return tbl
