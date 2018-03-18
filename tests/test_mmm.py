@@ -9,6 +9,8 @@ from tidyplusPy import mmm as mmm
 # dummy data for MMM
 data = pd.DataFrame(data=({'v_num': [4.1,np.nan,12.2,11,3.4,1.6,3.3,5.5], 'v_char': ['one','two',None,'two','two','one','two','two']}))
 
+i = 'v_char'
+
 col = list(data["v_num"])
 dat = [1,2,3,np.nan]
 
@@ -178,6 +180,11 @@ def test_outputs():
     #mod_out = mmm.mmm(df2,method="mode")
    # df_mod = pd.DataFrame(data=({'v_char': ['one','two','two','two','two','two']}))
     assert np.array_equal(mod_out,df_mod)
+    
+def test_append():
+    
+    assert not i not in data.columns.values.tolist()
+    
 #    
     
     
