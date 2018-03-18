@@ -72,7 +72,7 @@ def test_input():
         
 
         
-def row_input():
+def test_row_input():
     
     """
     Checks row input in nd array and dataframe
@@ -84,13 +84,12 @@ def row_input():
 
     
     with pytest.raises(ValueError):
-       em.em(empty_array)
-       
-    with pytest.raises(ValueError):
-       em.em(a)
+       em.em(np.array([]))
        
 
-def more_missing():
+       
+
+def test_more_missing():
     
     """
     Checks if array columns have atleast 2 non-missing for imputing
@@ -101,13 +100,13 @@ def more_missing():
     # Array with less than 2 non - missing
 
     with pytest.raises(ValueError):
-       em.em(a1)
+       em.em(np.array([[1, np.nan, 3], [4, 5, np.nan]]))
    
 
        
 
        
-def outputs():
+def test_outputs():
     
     """
     check if EM return expected output
